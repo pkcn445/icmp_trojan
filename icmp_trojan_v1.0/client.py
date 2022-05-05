@@ -81,10 +81,8 @@ def recv_data(s_data,ip):
     data_get = ""
     while True:
         pkt= rawSocket.recvfrom(2048)
-        print(pkt)
         if pkt[1][0] == ip:
             data = findall("pkcn-(.*?)-pkcn",str(pkt[0]))[0]
-            print(data)
             data = DataAesCrypt(AES_KEY,data).decrypt()
             if data and data != s_data:
                 data = loads(b64decode(data).decode())
